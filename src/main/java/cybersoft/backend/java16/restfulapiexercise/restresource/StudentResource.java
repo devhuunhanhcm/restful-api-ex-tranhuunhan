@@ -26,12 +26,16 @@ public class StudentResource {
 	
 	@PostMapping
 	public Object insertStudent(@RequestBody Student student) {
-		students.add(student);
+		Student entity = new Student();
+		entity.setName(student.getName());
+		entity.setAge(student.getAge());
+		
+		students.add(entity);
 		return students;
 	}
 	
 	@GetMapping("/add")
-	public Object insertStudent2(@RequestParam String name,@RequestParam int age) {
+	public Object insertStudent2(@RequestParam(name = "name",required = false) String name,@RequestParam(name ="age",required = false) int age) {
 		students.add(new Student(name,age));
 		return students;
 	}
